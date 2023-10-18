@@ -63,5 +63,47 @@ FROM FebSales
 WHERE location LIKE '%Los Angeles%'
 GROUP BY Product;
 
+#9. Which locations in New York received at least 3 orders in January, and how many orders did they each receive?
+
+SELECT distinct location, count(orderID) 
+FROM JanSales
+WHERE location LIKE '%New York%' 
+AND length(orderID) = 6
+AND orderID <> 'Order ID'
+GROUP BY location
+HAVING count(orderID) >=3;
+
+#10. How many of each type of headphone were sold in February?
+
+SELECT sum(Quantity), Product
+FROM FebSales
+WHERE Product LIKE '%Headphone%' 
+GROUP BY Product;
+
+#11. What was the average amount spent per account in February?
+
+SELECT SUM(FebSales.price * FebSales.Quantity)/count(customers.acctnum) as Avg_Spent
+FROM BIT_DB.FebSales
+JOIN BIT_DB.customers
+ON FebSales.orderID = customers.order_id
+WHERE length(orderID) = 6
+AND orderID <> 'Order ID';
+
+#12. What was the average quantity of products purchased per account in February?
+
+SELECT SUM(FebSales.Quantity)/count(customers.acctnum) as Avg_Quantity
+FROM BIT_DB.FebSales
+LEFT JOIN BIT_DB.customers
+ON FebSales.orderID = customers.order_id
+WHERE length (orderID) = 6 AND orderID <> 'Order ID';
+
+#13. Which product brought in the most revenue in January and how much revenue did it bring in total?
+
+SELECT Product, SUM(Quantity * price) as Revenue
+FROM JanSales
+GROUP BY Product
+ORDER BY SUM(Quantity * price) DESC
+LIMIT 1;
+
 
 
