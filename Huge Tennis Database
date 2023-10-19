@@ -1,0 +1,35 @@
+#For this analysis, I downloaded the "Huge Tennis Database" from Kaggle and then performed some analysis on the data using SQL. 
+
+
+#1. Show the first name, last name, and height of all the players from the US
+ 
+SELECT name_first, name_last,height, ioc
+FROM players
+WHERE ioc = 'USA'
+GROUP BY name_first, name_last
+ORDER BY avg(height) DESC;
+
+#2. What are the top ten coutries with the most players and how players do they have?
+
+SELECT count(ioc),ioc
+FROM players
+WHERE ioc IS NOT NULL
+GROUP BY ioc
+ORDER BY count(ioc) DESC
+LIMIT 10;
+
+#3. What are the names of every player Barry King beat in a match and where are they from?
+
+SELECT winner_name, loser_name, loser_ioc
+FROM matches
+WHERE winner_name = 'Barry King';
+
+
+#4. How many right-handed players are there per country?
+
+SELECT count(hand), ioc, hand
+FROM players
+WHERE ioc IS NOT NULL AND ioc <> '?' AND hand = 'R'
+GROUP BY ioc
+ORDER BY count(hand) DESC;
+
