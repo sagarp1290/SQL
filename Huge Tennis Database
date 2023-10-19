@@ -1,4 +1,4 @@
-#For this analysis, I downloaded the "Huge Tennis Database" from Kaggle and then performed some analysis on the data using SQL. 
+#For this project, I downloaded the "Huge Tennis Database" from Kaggle and then performed some analysis on the data using SQL. 
 
 
 #1. Show the first name, last name, and height of all the players from the US
