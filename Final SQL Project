@@ -1,0 +1,61 @@
+#Top 10 artist/artists that have the most albums in this dataset:
+
+SELECT count(albums.Title), artists.Name
+FROM albums
+JOIN artists
+ON albums.ArtistId = artists.ArtistId
+GROUP BY artists.Name
+ORDER BY count(albums.Title) DESC
+LIMIT 10;
+
+
+
+#How many  tracks of each media type are there in this dataset?
+
+SELECT media_types.Name, count(media_types.Name),media_types.MediaTypeId
+FROM media_types
+JOIN tracks
+ON media_types.MediaTypeId = tracks.MediaTypeId
+GROUP BY media_types.Name
+ORDER BY count(media_types.name) DESC;
+
+#Write a query to show the customers (first name,last name, company) the employees (first name, last name, title)  associated with them.
+
+SELECT customers.FirstName, customers.LastName, customers.Company, employees.FirstName, employees.LastName, employees.Title
+FROM customers
+INNER JOIN employees
+ON customers.SupportRepId = employees.EmployeeId;
+
+#Write a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+
+SELECT tracks.Name as Track, albums.Title as Album, media_types.Name as Media, genres.Name as Genre
+FROM tracks
+JOIN albums
+ON tracks.AlbumId = albums.AlbumId
+JOIN media_types
+ON tracks.MediaTypeId = media_types.MediaTypeId
+JOIN genres 
+ON tracks.GenreId = genres.GenreId;
+
+
+#How many invoices were there in 2009?
+
+SELECT count(invoiceId) 
+FROM invoices
+WHERE InvoiceDate LIKE '2009%';
+
+#Which were the top 10 tracks purchased in 2010?
+
+SELECT tracks.Name, count(tracks.Name), invoices.InvoiceDate
+FROM tracks
+JOIN invoice_items
+ON tracks.TrackId = invoice_items.TrackId
+JOIN invoices
+ON invoice_items.InvoiceId = invoices.InvoiceId
+WHERE invoices.InvoiceDate LIKE '2010%'
+GROUP BY tracks.Name
+ORDER BY count(tracks.Name) DESC
+LIMIT 10;
+
+
+
