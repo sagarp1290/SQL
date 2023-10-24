@@ -78,5 +78,24 @@ FROM invoices
 WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31';
 
 
+#9. Get a list of all the unique billing countries and how many cutomers are associated with each one. 
+
+SELECT distinct BillingCountry, count(CustomerId)
+FROM invoices
+GROUP BY BillingCountry
+ORDER BY count(CustomerId) DESC;
+
+
+#10. Get a list of all customers (first & last name) that were assisted by Jane Peacock.
+
+SELECT customers.FirstName, customers.LastName
+FROM customers
+JOIN employees
+ON customers.SupportRepId = employees.EmployeeId
+WHERE employees.FirstName = 'Jane' AND employees.LastName = 'Peacock';
+
+
+
+
 
 
