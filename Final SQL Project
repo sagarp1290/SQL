@@ -71,5 +71,12 @@ WHERE employees.Title = 'Sales Support Agent'
 ORDER BY invoices.Total DESC;
 
 
+#8. What were the total sales for 2011?
+
+SELECT SUM(invoices.Total)
+FROM invoices
+WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31';
+
+
 
 
